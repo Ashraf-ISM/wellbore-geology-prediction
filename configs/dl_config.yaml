@@ -1,0 +1,72 @@
+# =============================================================================
+# Deep Learning Model Configuration
+# =============================================================================
+
+# ---------------------------------------------------------------------------
+# LSTM Configuration
+# ---------------------------------------------------------------------------
+lstm:
+  name: "lstm_sequence_model"
+  type: "lstm"
+
+  architecture:
+    input_size: null          # Set dynamically based on features
+    hidden_size: 128
+    num_layers: 3
+    dropout: 0.2
+    bidirectional: true
+    batch_first: true
+
+  training:
+    batch_size: 64
+    num_epochs: 100
+    learning_rate: 1.0e-3
+    weight_decay: 1.0e-4
+    scheduler: "cosine"       # Options: cosine, step, plateau
+    patience: 15              # Early stopping patience
+    gradient_clip: 1.0
+
+  sequence:
+    window_size: 50           # Number of depth points per sequence
+    stride: 10                # Step between sequences
+    target_col: "formation"
+
+# ---------------------------------------------------------------------------
+# Transformer Configuration
+# ---------------------------------------------------------------------------
+transformer:
+  name: "transformer_sequence_model"
+  type: "transformer"
+
+  architecture:
+    d_model: 128
+    nhead: 8
+    num_encoder_layers: 4
+    dim_feedforward: 512
+    dropout: 0.1
+    activation: "relu"
+    batch_first: true
+
+  training:
+    batch_size: 32
+    num_epochs: 100
+    learning_rate: 1.0e-4
+    weight_decay: 1.0e-4
+    warmup_steps: 500
+    scheduler: "cosine_warmup"
+    patience: 15
+    gradient_clip: 1.0
+
+  sequence:
+    window_size: 100
+    stride: 20
+    target_col: "formation"
+
+# ---------------------------------------------------------------------------
+# Common training settings
+# ---------------------------------------------------------------------------
+device: "auto"               # auto, cpu, cuda, mps
+mixed_precision: true
+num_workers: 4
+pin_memory: true
+seed: 42

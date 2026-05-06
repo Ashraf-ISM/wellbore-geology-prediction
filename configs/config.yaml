@@ -1,0 +1,95 @@
+# =============================================================================
+# Wellbore Geology Prediction - Main Configuration
+# =============================================================================
+
+project:
+  name: "wellbore-geology-prediction"
+  description: "AI-powered geosteering and wellbore geology prediction"
+  version: "1.0.0"
+  author: "Md Ashraf"
+  competition: "ROGII - Wellbore Geology Prediction"
+
+# ---------------------------------------------------------------------------
+# Paths
+# ---------------------------------------------------------------------------
+paths:
+  data_dir: "data"
+  raw_dir: "data/raw"
+  processed_dir: "data/processed"
+  submissions_dir: "data/submissions"
+  models_dir: "outputs/models"
+  plots_dir: "outputs/plots"
+  logs_dir: "outputs/logs"
+  notebooks_dir: "notebooks"
+
+# ---------------------------------------------------------------------------
+# Data files
+# ---------------------------------------------------------------------------
+data:
+  train_file: "train.csv"
+  test_file: "test.csv"
+  sample_submission_file: "sample_submission.csv"
+  target_column: "formation"
+  well_id_column: "well_id"
+  depth_column: "md"
+
+# ---------------------------------------------------------------------------
+# Feature engineering
+# ---------------------------------------------------------------------------
+features:
+  # Drilling mechanics features
+  drilling_features:
+    - "rop"           # Rate of Penetration
+    - "wob"           # Weight on Bit
+    - "rpm"           # Rotary Speed
+    - "torque"        # Torque
+    - "flow_rate"     # Flow Rate
+    - "ecd"           # Equivalent Circulating Density
+    - "mse"           # Mechanical Specific Energy
+
+  # LWD / petrophysical features
+  petrophysical_features:
+    - "gr"            # Gamma Ray
+    - "resistivity"   # Resistivity
+    - "neutron"       # Neutron Porosity
+    - "density"       # Bulk Density
+    - "sonic"         # Sonic (DT)
+    - "pe"            # Photoelectric Effect
+
+  # Directional survey features
+  directional_features:
+    - "inclination"
+    - "azimuth"
+    - "dog_leg"
+    - "tvd"           # True Vertical Depth
+    - "md"            # Measured Depth
+
+  # Rolling window sizes for time-series features
+  rolling_windows: [3, 5, 10, 20, 50]
+
+  # Lag features
+  lag_steps: [1, 2, 3, 5, 10]
+
+# ---------------------------------------------------------------------------
+# Validation
+# ---------------------------------------------------------------------------
+validation:
+  strategy: "group_kfold"
+  n_folds: 5
+  group_column: "well_id"
+  shuffle: true
+  random_state: 42
+  metric: "rmse"
+
+# ---------------------------------------------------------------------------
+# Logging
+# ---------------------------------------------------------------------------
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  log_file: "outputs/logs/training.log"
+
+# ---------------------------------------------------------------------------
+# Reproducibility
+# ---------------------------------------------------------------------------
+seed: 42
