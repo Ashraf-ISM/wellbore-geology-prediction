@@ -1,0 +1,114 @@
+# Byte-compiled / optimized / C extensions
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+.env/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Data files (raw data should not be committed)
+data/raw/*.csv
+data/raw/*.xlsx
+data/raw/*.parquet
+data/raw/*.zip
+data/processed/*.csv
+data/processed/*.parquet
+data/processed/*.feather
+data/processed/*.json
+*.h5
+*.hdf5
+
+# Keep submissions directory tracked but not the CSV files
+data/submissions/*.csv
+
+# Model outputs
+outputs/models/*.pkl
+outputs/models/*.joblib
+outputs/models/*.pt
+outputs/models/*.pth
+outputs/models/*.cbm
+outputs/models/*.txt
+outputs/logs/*.log
+outputs/plots/*.png
+outputs/plots/*.html
+
+# OS-specific files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDEs and editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+
+# Testing and coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
+nosetests.xml
+test-results/
+
+# Type checking
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+
+# Optuna
+optuna.db
+*.db
+
+# Weights & Biases
+wandb/
+
+# MLflow
+mlruns/
+mlflow.db
+
+# Secrets
+.env
+*.env
+secrets.yaml
+credentials.json
